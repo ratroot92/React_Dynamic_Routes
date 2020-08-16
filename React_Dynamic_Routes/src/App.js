@@ -1,4 +1,5 @@
 import React from "react";
+
 import ReactDOM from "react-dom";
 import Navbar from "./layouts/Navbar";
 import Home from "./pages/Home";
@@ -6,7 +7,7 @@ import Contact from "./pages/Contact";
 import Logout from "./pages/Logout";
 import Faq from "./pages/Faq";
 import About from "./pages/About";
-import Signup from "./pages/Signup";
+import Activate from "./pages/Activate";
 import {
   BrowserRouter as Router,
   Route,
@@ -16,7 +17,9 @@ import {
 } from "react-router-dom";
 import Login from "./pages/Login";
 import Protected from "./components/Protected/Protected";
-
+import Signup from "./pages/Signup";
+// Contect Api
+const { Provider, Consumer } = React.createContext();
 const LinksList = [
   {
     Page_Name: "Home",
@@ -72,14 +75,20 @@ const LinksList = [
   },
 ];
 class App extends React.Component {
+  state = {
+    isLoggedIn: false,
+  };
   render() {
     console.log("ready");
     // localStorage.clear();
     return (
-      <React.Fragment>
+      <Provider>
         <Router>
-          <Navbar CompanyName="Test" Links={LinksList} />
-
+          {this.isLoggedIn ? (
+            <Navbar CompanyName="Test" Links={LinksList} />
+          ) : (
+            <div></div>
+          )}
           <Switch>
             {React.Children.toArray(
               LinksList.map((link) => (
@@ -100,9 +109,10 @@ class App extends React.Component {
             )}
             <Route path="/login" exact component={Login}></Route>
             <Route path="/signup" exact component={Signup}></Route>
+            <Route path="/api/users/activate/:token" exact render={props=><Activate{...props}/>}></Route>
           </Switch>
         </Router>
-      </React.Fragment>
+      </Provider>
     );
   }
 }

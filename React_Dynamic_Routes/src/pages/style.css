@@ -1,0 +1,102 @@
+/* login page css */
+
+.custom-login-input {
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 40px;
+    width: 300px!important;
+}
+
+#submit {
+    border-radius: 15px;
+    font-weight: bold;
+    width: 150px;
+    margin-top: 20px;
+    ;
+}
+
+.sidebar-wrapper {
+    border-radius: 3px 0px 0px 3px;
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 400px;
+    ;
+}
+
+.form-wrapper {
+    border-radius: 0px 3px 3px 0px;
+    height: 400px;
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#signupBtn {
+    border-radius: 15px;
+    font-weight: bold;
+    width: 150px;
+    margin-top: 20px;
+    ;
+}
+
+.login-component-wrapper {
+    height: 100%;
+}
+
+
+/* end login page css */
+
+
+/* start signup css */
+
+.custom-signup-input {
+    margin-top: 5px;
+    height: 40px;
+    width: 100%;
+    ;
+}
+
+.signup-component-wrapper {
+    height: 100%;
+}
+
+.signup-form-wrapper {
+    border-radius: 5px 5px 5px 5px;
+    /* height: 500px; */
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #0f0c29;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top: 20px;
+}
+
+.error-container {
+    width: 100%;
+    margin-top: 5px;
+    padding-top: 0px;
+    font-size: 13px;
+    height: 20px;
+    overflow: hidden;
+}
+
+#signupBtn {
+    width: 150px;
+}
+
+.custom-signup-lastName-input,
+.custom-signup-firstName-input {}
