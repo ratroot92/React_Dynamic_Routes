@@ -36,9 +36,8 @@ var UserSchema = new Schema(
       // lowerCase=true,
       required: true,
     },
-    password: {
+    hashed_password: {
       type: String,
-      require: true,
       unique: false,
       required: true,
     },
@@ -64,25 +63,23 @@ var UserSchema = new Schema(
   },
   { timestamps: true }
 );
-
-//Virtual Password
-UserSchema.virtual("vPassword")
-  .set(function (vPassword) {
-    //set vPassword note you must normal function * not arrow function
-    this.vPassword = vPassword;
+// virtual
+UserSchema.virtual("password")
+  .set(function (password) {
+    this._password = password;
     this.salt = this.makeSalt();
-    this.password = this.encryptPassword(vPassword);
+    this.hashed_password = this.encryptPassword(password);
   })
   .get(function () {
     return this._password;
   });
 
+// methods
 UserSchema.methods = {
-  //generate salt
-  makeSalt: function () {
-    return Math.round(new Date().valueOf() * Math.random()) + "";
+  authenticate: function (plainText) {
+    return this.encryptPassword(plainText) === this.hashed_password;
   },
-  //encrypt password
+
   encryptPassword: function (password) {
     if (!password) return "";
     try {
@@ -95,9 +92,8 @@ UserSchema.methods = {
     }
   },
 
-  //Compare password between plain get from user and hashed
-  authenticate: function (plainPassword) {
-    return this.encryptPassword(plainPassword) === this.password;
+  makeSalt: function () {
+    return Math.round(new Date().valueOf() * Math.random()) + "";
   },
 };
 module.exports = mongoose.model("User", UserSchema);

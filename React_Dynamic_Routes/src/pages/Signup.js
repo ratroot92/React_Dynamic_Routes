@@ -8,38 +8,39 @@ import Login_Compoenent_BackgroundImage from "./../assets/background_3.jpg";
 import Form_BackgroundImage from "./../assets/background_2.jpg";
 import "./style.css";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
- import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 /* Validation starts here */
 const schema = yup.object().shape({
   first_name: yup
     .string("First Name must be string")
-    .required(function(value){
-        toast.warning("First name  is required");
+    .required(function (value) {
+      toast.warning("First name  is required");
     })
-    .min(3, function(value){
-        toast.warning("First name  must be atleast 3 charachters");
+    .min(3, function (value) {
+      toast.warning("First name  must be atleast 3 charachters");
     })
-    .max(32, function(value){
-        toast.warning("First name  must atmost 32 chrachters");
+    .max(32, function (value) {
+      toast.warning("First name  must atmost 32 chrachters");
     }),
 
   last_name: yup
     .string("Last Name must be string ")
-    .required(function(value){
-        toast.warning("last name is required");
+    .required(function (value) {
+      toast.warning("last name is required");
     })
-    .min(3, function(value){
-        toast.warning("Last name  must be atleast 3 charachters");
+    .min(3, function (value) {
+      toast.warning("Last name  must be atleast 3 charachters");
     })
-    .max(32, function(value){
-        toast.warning("Last name  must atmost 32 chrachters");
+    .max(32, function (value) {
+      toast.warning("Last name  must atmost 32 chrachters");
     }),
 
   email: yup
     .string()
-    .required(function(value){
-        toast.warning("Email is required");
+    .required(function (value) {
+      toast.warning("Email is required");
     })
     .email("Invalid email")
     .test("Unique Email", "Email already in use", function (value) {
@@ -50,7 +51,7 @@ const schema = yup.object().shape({
           })
           .then((res) => {
             if (res.data.msg === "Email already been taken") {
-               toast.error(res.data.msg);
+              toast.error(res.data.msg);
               resolve(false);
             }
             resolve(true);
@@ -60,39 +61,39 @@ const schema = yup.object().shape({
 
   password: yup
     .string("Password must be string ")
-    .required(function(value){
-        toast.warning("Password is required");
+    .required(function (value) {
+      toast.warning("Password is required");
     })
-    .min(3, function(value){
-        toast.warning("Password  must be atleast 3 charachters");
+    .min(3, function (value) {
+      toast.warning("Password  must be atleast 3 charachters");
     })
-    .max(32, function(value){
-        toast.warning("Password  must atmost 32 chrachters");
+    .max(32, function (value) {
+      toast.warning("Password  must atmost 32 chrachters");
     }),
-    
+
   c_password: yup
     .string()
-    .required(function(value){
-        toast.warning("Confirm password is required");
+    .required(function (value) {
+      toast.warning("Confirm password is required");
     })
-    .oneOf([yup.ref("password"), null], function(value){
-        toast.warning("Unmatched passwords");
+    .oneOf([yup.ref("password"), null], function (value) {
+      toast.warning("Unmatched passwords");
     }),
-    // agree:yup.string()
-    //  .checked(function(value){
-    //     toast.warning("Agree to terms and  conidtions ");
-    // }),
+  // agree:yup.string()
+  //  .checked(function(value){
+  //     toast.warning("Agree to terms and  conidtions ");
+  // }),
 
   username: yup
     .string("Username must be string ")
-    .required(function(value){
-        toast.warning("Username is required ");
+    .required(function (value) {
+      toast.warning("Username is required ");
     })
-    .min(3, function(value){
-        toast.warning("Username  must be atleast 3 charachters");
+    .min(3, function (value) {
+      toast.warning("Username  must be atleast 3 charachters");
     })
-    .max(32, function(value){
-        toast.warning("Username  must atmost 32 chrachters");
+    .max(32, function (value) {
+      toast.warning("Username  must atmost 32 chrachters");
     })
     .test("Unique username", "Username already in taken", function (value) {
       return new Promise((resolve, reject) => {
@@ -102,7 +103,7 @@ const schema = yup.object().shape({
           })
           .then((res) => {
             if (res.data.msg === "Username already been taken") {
-                toast.error(res.data.msg);
+              toast.error(res.data.msg);
               resolve(false);
             }
             resolve(true);
@@ -323,8 +324,6 @@ export default function Signup(props) {
         </form>
       </div>
       <div className="col-md-3"></div>
-      
     </div>
-    
   );
 }

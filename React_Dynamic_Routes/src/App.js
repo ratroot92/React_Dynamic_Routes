@@ -8,6 +8,7 @@ import Logout from "./pages/Logout";
 import Faq from "./pages/Faq";
 import About from "./pages/About";
 import Activate from "./pages/Activate";
+import { ProtectedRoute } from "./components/Protected/ProtectedRoute";
 import {
   BrowserRouter as Router,
   Route,
@@ -15,8 +16,8 @@ import {
   Switch,
   withRouter,
 } from "react-router-dom";
-import Login from "./pages/Login";
-import Protected from "./components/Protected/Protected";
+import LoginForm from "./pages/login/LoginForm";
+import Protected from "./components/Protected/ProtectedRoute";
 import Signup from "./pages/Signup";
 // Contect Api
 const { Provider, Consumer } = React.createContext();
@@ -75,22 +76,33 @@ const LinksList = [
   },
 ];
 class App extends React.Component {
-  state = {
-    isLoggedIn: false,
+  constructor(props) {
+    super(props);
+    this.updateloginStatus = this.updateloginStatus.bind(this);
+    this.state = {
+      isLoggedIn: false,
+    };
+  }
+
+  updateloginStatus = (status) => {
+    this.setState({ isLoggedIn: status }, () => {
+      console.log("this.setState function called");
+    });
   };
+
   render() {
-    console.log("ready");
+    const { isLoggedIn } = this.state;
+
     // localStorage.clear();
     return (
-      <Provider>
-        <Router>
-          {this.isLoggedIn ? (
-            <Navbar CompanyName="Test" Links={LinksList} />
-          ) : (
+      <Provider value={this.state}>
+        {/* {isLoggedIn ? ( */}
+        <Navbar CompanyName="Test" Links={LinksList} />
+        {/* ) : (
             <div></div>
-          )}
-          <Switch>
-            {React.Children.toArray(
+          )} */}
+        <Switch>
+          {/* {React.Children.toArray(
               LinksList.map((link) => (
                 <Route
                   path={link.Path}
@@ -100,18 +112,27 @@ class App extends React.Component {
                   // render={function () {return React.createElement(link.Component_Name)}}
                 >
                   <Protected
+                    updateloginStatus={this.updateloginStatus.bind(this)}
                     component={function () {
                       return React.createElement(link.Component_Name);
                     }}
                   />
                 </Route>
               ))
-            )}
-            <Route path="/login" exact component={Login}></Route>
-            <Route path="/signup" exact component={Signup}></Route>
-            <Route path="/api/users/activate/:token" exact render={props=><Activate{...props}/>}></Route>
-          </Switch>
-        </Router>
+            )} */}
+          <ProtectedRoute path="/home" exact component={Home} />
+          <ProtectedRoute path="/contact" exactcomponent={Contact} />
+          <ProtectedRoute path="/about" exact component={About} />
+          <ProtectedRoute path="/faq" exact component={Faq} />
+          <Route path="/" exact component={LoginForm} />
+          <Route path="/signup" exact component={Signup} />
+          <Route
+            path="/api/users/activate/:token"
+            exact
+            render={(props) => <Activate {...props} />}
+          />
+          <Route path="*" component={() => "404 NOT FOUND"} />
+        </Switch>
       </Provider>
     );
   }

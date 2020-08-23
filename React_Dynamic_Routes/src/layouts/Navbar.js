@@ -1,5 +1,6 @@
 import React from "react";
 import { Home } from "../pages/Home";
+import auth from "./../components/Protected/Auth";
 function Navbar(props) {
   return (
     <div>
@@ -28,6 +29,19 @@ function Navbar(props) {
               </li>
             ))}
           </ul>
+          <button
+            onClick={() => {
+              console.log("Logout button clicked ");
+              auth.logout(() => {
+                console.log("auth status false");
+                props.history.push("/");
+              });
+            }}
+            type="submit"
+            className="btn btn-primary"
+          >
+            Logout
+          </button>
           <div>
             <button className="btn btn-success btn-sm ">
               <i className="fa fa-shopping-basket mr-2 "></i>0

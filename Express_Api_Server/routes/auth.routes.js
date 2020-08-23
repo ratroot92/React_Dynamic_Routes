@@ -40,41 +40,7 @@ router.post("/auth/login", (req, res) => {
         if (user) {
           console.log({ msg: "Valid User" });
           return res.status(200).json({ message: "Valid User" });
-          //Generate Token
-          const token = jwt.sign(
-            {
-              username,
-              password,
-            },
-            process.env.JWT_ACCOUNT_ACTIVATION,
-            {
-              expiresIn: "15m",
-            }
-          );
 
-          const emailData = {
-            from: process.env.EMAIL_FROM,
-            to: to,
-            subject: "Account Activation Link",
-            html: `<div>
-            <h1>Please Click on the link to activate </h1>
-            <p>${process.env.CLIENT_URL}/users/activate/${token}</p>
-            <p>This email contains sensitive info </p>
-            <p>${process.env.CLIENT_URL}</p>
-            </div>`,
-          };
-          sgMail.send(emailData).then((sent) => {
-            return res
-              .json({
-                message: `Email has been sent to ${email}`,
-              })
-              .catch((err) => {
-                return res.status(400).json({
-                  error: errorHandler(err),
-                });
-              });
-          });
-        }
         console.log({ msg: "Invalid User" });
         return res.status(400).json({ message: "In-Valid User" });
       })
