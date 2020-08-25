@@ -3,15 +3,13 @@ import { Route, Redirect } from "react-router-dom";
 import auth from "./Auth";
 
 export const ProtectedRoute = ({ component: Component, onChange, ...rest }) => {
-  console.log("auth component called ");
   let User = JSON.parse(localStorage.getItem("logged_user"));
-  console.log(User == null);
   if (User == null) {
-    onChange(false)
-    console.log("no user logged")
+    onChange(false);
+    console.log("NO USER LOGGED  -- PROTECTED ROUTE");
   } else {
-    onChange(true)
-    console.log("localtsorage active")
+    onChange(true);
+    console.log("USER LOGGED IN -- PROTECTED ROUTE ");
   }
   return (
     <Route
@@ -35,5 +33,3 @@ export const ProtectedRoute = ({ component: Component, onChange, ...rest }) => {
     />
   );
 };
-
-

@@ -36,22 +36,3 @@ function Card(props) {
   );
 }
 export default Card;
-
-{
-  /* <div className="card">
-    <div className="card-img">
-    <img src="{data.CardImg}" alt="" className="img-fluid" />
-    </div>
-    <div className="card-header">
-    <div className="card-title">{data.cardTitle}</div>
-    </div>
-    <div className="card-body">
-    <div className="card-text">
-    {data.CardText}
-    </div>
-    </div>
-    <div className="card-header">
-    
-    </div>
-    </div> */
-}

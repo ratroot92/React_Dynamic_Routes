@@ -33,7 +33,6 @@ const CardData = [
 ];
 class Home extends Component {
   render() {
-    console.log(this.props);
     return (
       <div className="container">
         <Card Data={CardData} />

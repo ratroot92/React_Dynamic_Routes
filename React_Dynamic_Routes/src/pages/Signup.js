@@ -1,11 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { withRouter } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers";
 import * as yup from "yup";
-import Form_Sidebar_BackgroundImage from "./../assets/background_1.png";
 import Login_Compoenent_BackgroundImage from "./../assets/background_3.jpg";
-import Form_BackgroundImage from "./../assets/background_2.jpg";
 import "./style.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";

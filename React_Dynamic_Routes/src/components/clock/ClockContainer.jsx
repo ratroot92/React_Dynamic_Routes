@@ -1,6 +1,6 @@
 /*Example Container and Presentation */
 /*Logical Container Component  */
-import React, { Component } from "react";
+import React from "react";
 import ClockWidget from "./ClockWidget";
 
 export default class Clock extends React.Component {
