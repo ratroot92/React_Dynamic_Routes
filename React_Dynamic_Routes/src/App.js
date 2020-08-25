@@ -108,7 +108,6 @@ class App extends React.Component {
                   path={link.Path}
                   exact={link.Exact}
                   key={link.Id}
-
                   // render={function () {return React.createElement(link.Component_Name)}}
                 >
                   <Protected
