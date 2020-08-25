@@ -59,6 +59,7 @@ exports.registerController = (req, res) => {
 exports.activationController = (req, res) => {
   console.log("activation controller");
   const { token } = req.body;
+  console.log(token)
   if (token) {
     //Verify the token is valid or invalid (expired)
     jwt.verify(token, process.env.JWT_ACCOUNT_ACTIVATION, (error, decoded) => {

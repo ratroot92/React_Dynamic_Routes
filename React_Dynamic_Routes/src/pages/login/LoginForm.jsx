@@ -32,7 +32,7 @@ export default function LoginForm(props) {
   });
 
   const routeChange = () => {
-    let path = `/login`;
+    let path = `/signup`;
     props.history.push(path);
   };
 

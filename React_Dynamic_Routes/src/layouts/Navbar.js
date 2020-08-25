@@ -1,7 +1,13 @@
 import React from "react";
-import { Home } from "../pages/Home";
 import auth from "./../components/Protected/Auth";
 function Navbar(props) {
+ const logOut=()=>{
+  console.log("Logout button clicked ");
+            
+  localStorage.clear();
+   props.onChange(false)
+   props.history.push("/");
+ }
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -30,13 +36,7 @@ function Navbar(props) {
             ))}
           </ul>
           <button
-            onClick={() => {
-              console.log("Logout button clicked ");
-              auth.logout(() => {
-                console.log("auth status false");
-                props.history.push("/");
-              });
-            }}
+            onClick={() => {logOut()}}
             type="submit"
             className="btn btn-primary"
           >

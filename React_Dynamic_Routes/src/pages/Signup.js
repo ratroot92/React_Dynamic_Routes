@@ -120,7 +120,7 @@ export default function Signup(props) {
   });
 
   const routeChange = () => {
-    let path = `/login`;
+    let path = `/`;
     props.history.push(path);
   };
   const addUser = (data, e) => {

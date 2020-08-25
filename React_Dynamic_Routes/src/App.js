@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import ReactDOM from "react-dom";
 import Navbar from "./layouts/Navbar";
@@ -75,33 +75,22 @@ const LinksList = [
     Id: 6,
   },
 ];
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.updateloginStatus = this.updateloginStatus.bind(this);
-    this.state = {
-      isLoggedIn: false,
-    };
-  }
+function App()   {
+  
+  const [loginStatus, setLoginStatus] = useState(false);
+  const chnageLoginStatus = (value) => {setLoginStatus(value)
+  console.log("value changed")};
 
-  updateloginStatus = (status) => {
-    this.setState({ isLoggedIn: status }, () => {
-      console.log("this.setState function called");
-    });
-  };
-
-  render() {
-    const { isLoggedIn } = this.state;
-
-    // localStorage.clear();
+ console.log(loginStatus)
     return (
-      <Provider value={this.state}>
-        {/* {isLoggedIn ? ( */}
-        <Navbar CompanyName="Test" Links={LinksList} />
-        {/* ) : (
+      <Provider >
+      {loginStatus ? (
+        <Navbar onChange={(value) => chnageLoginStatus(value)} CompanyName="Test" Links={LinksList} />
+         ) : (
             <div></div>
-          )} */}
+          )} 
         <Switch>
+        
           {/* {React.Children.toArray(
               LinksList.map((link) => (
                 <Route
@@ -119,12 +108,12 @@ class App extends React.Component {
                 </Route>
               ))
             )} */}
-          <ProtectedRoute path="/home" exact component={Home} />
-          <ProtectedRoute path="/contact" exactcomponent={Contact} />
-          <ProtectedRoute path="/about" exact component={About} />
-          <ProtectedRoute path="/faq" exact component={Faq} />
-          <Route path="/" exact component={LoginForm} />
-          <Route path="/signup" exact component={Signup} />
+          <ProtectedRoute onChange={(value) => chnageLoginStatus(value)} path="/home" exact component={Home} />
+          <ProtectedRoute onChange={(value) => chnageLoginStatus(value)}  path="/contact" exact component={Contact} />
+          <ProtectedRoute onChange={(value) => chnageLoginStatus(value)}  path="/about" exact component={About} />
+          <ProtectedRoute onChange={(value) => chnageLoginStatus(value)}  path="/faq" exact component={Faq} />
+          <Route onChange={(value) => chnageLoginStatus(value)}  path="/" exact component={LoginForm} />
+          <Route onChange={(value) => chnageLoginStatus(value)}  path="/signup" exact component={Signup} />
           <Route
             path="/api/users/activate/:token"
             exact
@@ -135,6 +124,6 @@ class App extends React.Component {
       </Provider>
     );
   }
-}
+
 
 export default App;
