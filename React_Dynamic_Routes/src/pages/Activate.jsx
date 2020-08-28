@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import jwt from "jsonwebtoken";
@@ -8,20 +7,20 @@ import { Redirect } from "react-router-dom";
 
 const Activate = ({ match }) => {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     token: "",
     show: true,
   });
 
   useEffect(() => {
     let token = match.params.token;
-    let { name } = jwt.decode(token);
+    let { username } = jwt.decode(token);
 
     if (token) {
-      setFormData({ ...formData, name, token });
+      setFormData({ ...formData, username, token });
     }
 
-    console.log(token, name);
+ console.log(token, username);
   }, [match.params]);
   const { name, token, show } = formData;
 
@@ -39,6 +38,7 @@ const Activate = ({ match }) => {
         });
 
         toast.success(res.data.message);
+ 
         //   localStorage.setItem("Logged_User",JSON.stringify(res.data.newUser))
         //   console.log(localStorage.getItem("Logged_User"))
         //   console.log("User saved to local storage ")

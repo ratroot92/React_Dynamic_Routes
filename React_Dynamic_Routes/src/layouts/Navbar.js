@@ -2,11 +2,10 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 // import auth from "./../components/Protected/Auth";
 function Navbar(props) {
+  
   const logOut = () => {
     console.log("Logout button clicked ");
-
     localStorage.clear();
-    props.onChange(false);
     props.history.push("/");
   };
   return (

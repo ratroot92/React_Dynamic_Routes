@@ -13,6 +13,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import auth from "./../../components/Protected/Auth";
 import { Redirect } from "react-router-dom";
+
 /* Validation starts here */
 const schema = yup.object().shape({
   password: yup.string("Password must be string ").required(function (value) {
@@ -29,13 +30,7 @@ function LoginForm(props) {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
-  console.log("LOGIN STATUS  -- LOGIN FORM = " + props.authState);
-  if (props.authState === true) {
-    props.OnChange(true);
-    console.log("LOGIN STATUS CHECK = TRUE");
-  } else {
-    console.log("LOGIN STATUS CHECK = FALSE");
-  }
+
 
   const routeChange = () => {
     let path = `/signup`;
@@ -51,8 +46,9 @@ function LoginForm(props) {
           //save user to localstorage
           localStorage.setItem("logged_user", JSON.stringify(res.data));
           toast.success("Login Successfull");
-          console.log("auth sattus changed to true ");
+          console.log("auth sattus changed to true ")
           props.history.push("/home");
+         
         } else {
           console.log("request error");
         }

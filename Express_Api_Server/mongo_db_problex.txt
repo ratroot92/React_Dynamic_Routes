@@ -1,0 +1,6 @@
+
+Try 
+sudo chown `whoami` /tmp/mongodb-27017.sock
+Try 
+sudo rm -rf /tmp/mongodb-27017.sock
+sudo service mongod start

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 
 import Navbar from "./layouts/Navbar";
 import Home from "./pages/Home";
@@ -11,6 +11,7 @@ import { ProtectedRoute } from "./components/Protected/ProtectedRoute";
 import { Route, Switch } from "react-router-dom";
 import LoginForm from "./pages/login/LoginForm";
 import Signup from "./pages/Signup";
+import {Redirect} from 'react-router-dom';
 // Contect Api
 const { Provider, Consumer } = React.createContext();
 const LinksList = [
@@ -50,59 +51,78 @@ const LinksList = [
     Id: 4,
   },
 ];
-function App() {
-  const [state, setState] = useState(false);
-  const changeState = (value) => {
-    setState(value);
-    console.log("LOGIN STATUS VALUE CHANGE TO == " + state);
-  };
 
+
+// Component Starts Here 
+
+class App extends React.Component {
+  //##################Contructor Start ###################//
+  constructor(props){
+    super(props);
+    this.state={
+      userIslogged:false,
+    }
+
+  }
+    //##################Contructor End ###################//
+componentDidMount(){
+  let User = JSON.parse(localStorage.getItem("logged_user"));
+  console.log(User)
+  if (User == null) {    
+   this.setState({userIslogged:false})
+  } else {
+    this.setState({userIslogged:true})
+
+    
+  }
+}
+
+
+
+
+
+  //##################Render Start ###################//
+  render(){
+
+  const {userIslogged}=this.state
   return (
     <Provider>
-      {state ? (
-        <Navbar
-          onChange={(value) => changeState(value)}
-          CompanyName="React Node App"
-          Links={LinksList}
-        />
-      ) : (
-        <div></div>
-      )}
+     
       <Switch>
         <ProtectedRoute
-          onChange={(value) => changeState(value)}
           path="/home"
           exact
           component={Home}
         />
         <ProtectedRoute
-          onChange={(value) => changeState(value)}
+         
           path="/contact"
           exact
           component={Contact}
         />
         <ProtectedRoute
-          onChange={(value) => changeState(value)}
+         
           path="/about"
           exact
           component={About}
         />
-        <ProtectedRoute
-          onChange={(value) => changeState(value)}
+        <ProtectedRoute 
           path="/faq"
           exact
           component={Faq}
         />
-
-        <Route
+        { userIslogged ? (
+        <Redirect to="/home"/>):(<Route
           path="/"
           component={() => (
-            <LoginForm onChange={(value) => changeState(value)} state={state} />
+            <LoginForm   />
           )}
           exact
-        />
+        />)}
+     
+       
         <Route
-          onChange={(value) => changeState()}
+          
           path="/signup"
           exact
           component={Signup}
@@ -116,6 +136,8 @@ function App() {
       </Switch>
     </Provider>
   );
+    //##################Render End  ###################//
+}
 }
 
 export default App;

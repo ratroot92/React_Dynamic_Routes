@@ -29,6 +29,11 @@ export default class Clock extends React.Component {
       ampm: currentTime.getHours() >= 12 ? "pm" : "am",
     };
   }
+  componentWillUnmount(){
+    if(this.timeout){
+      clearTimeout(this.timeout)
+    }
+  }
   /*Logical Presentational Component  */
   render() {
     const { hours, minutes, seconds, ampm } = this.state;
